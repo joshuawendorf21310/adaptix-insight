@@ -30,11 +30,19 @@ export default function DeploymentHealthView() {
   const loadHealthStatus = useCallback(async () => {
     try {
       const [healthRes, readinessRes] = await Promise.all([
-        get('/health/full'),
-        get('/health/readiness'),
+        get('/api/v1/system-health/dashboard'),
+        get('/api/v1/founder/deployment'),
       ]);
-      setHealth(healthRes.data as HealthCheckResult);
-      setReadiness(readinessRes.data as ReadinessResult);
+      setHealth({
+        overall_status: (healthRes.data as Record<string, unknown>).overall_status as string,
+        timestamp: ((healthRes.data as Record<string, unknown>).as_of as string) ?? new Date().toISOString(),
+        checks: healthRes.data as Record<string, unknown>,
+      });
+      setReadiness({
+        ready_for_production: Boolean((readinessRes.data as Record<string, unknown>).deployment_ready_for_aws),
+        completeness_percent: Number((readinessRes.data as Record<string, unknown>).completion_percent ?? 0),
+        checks: ((readinessRes.data as Record<string, unknown>).checks as Record<string, string>) ?? {},
+      });
     } catch (err) {
       console.error('Failed to load health status:', err);
     }

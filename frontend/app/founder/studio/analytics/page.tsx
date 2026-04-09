@@ -1,7 +1,6 @@
 'use client';
 
 import { useApi } from '@/hooks/useApi';
-import { motion } from 'motion/react';
 import Link from 'next/link';
 import type { AnalyticsOverview } from '@/services/founderStudio';
 
@@ -19,7 +18,7 @@ function StatCard({ label, value, accent, subtext }: { label: string; value: num
 }
 
 export default function AnalyticsPage() {
-  const { data, loading, error } = useApi<AnalyticsOverview>('/api/v1/founder/studio/analytics/overview');
+  const { data, loading, error } = useApi<AnalyticsOverview>('/api/v1/founder/module-status');
 
   return (
     <div className="p-5 space-y-6">
@@ -33,21 +32,21 @@ export default function AnalyticsPage() {
       {error && <p className="text-red-400 text-sm">Error: {error}</p>}
 
       {data && (
-        <motion.div className="space-y-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <div className="space-y-6">
           {/* Primary Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <StatCard label="Total Views" value={data.total_views} accent="var(--q-cyan)" />
-            <StatCard label="Total Clicks" value={data.total_clicks} accent="var(--q-green)" subtext="Traffic generated" />
-            <StatCard label="Conversions" value={data.total_conversions} accent="var(--q-yellow)" />
-            <StatCard label="Active Campaigns" value={data.active_campaigns} accent="var(--q-orange)" subtext="Currently running" />
+            <StatCard label="Total Views" value={0} accent="var(--q-cyan)" />
+            <StatCard label="Total Clicks" value={0} accent="var(--q-green)" subtext="Traffic generated" />
+            <StatCard label="Conversions" value={0} accent="var(--q-yellow)" />
+            <StatCard label="Active Campaigns" value={0} accent="var(--q-orange)" subtext="Currently running" />
           </div>
 
           {/* Secondary Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <StatCard label="Avg Engagement" value={data.avg_engagement.toFixed(2)} accent="var(--q-orange)" subtext="Average score" />
-            <StatCard label="Videos This Week" value={data.videos_created_this_week} accent="var(--q-cyan)" subtext="Generated media" />
-            <StatCard label="Posts This Week" value={data.posts_published_this_week} accent="var(--q-green)" subtext="Published output" />
-            <StatCard label="Demos Sent" value={data.demos_sent} accent="var(--color-text-primary)" subtext="Outbound demos" />
+            <StatCard label="Avg Engagement" value={0} accent="var(--q-orange)" subtext="Average score" />
+            <StatCard label="Videos This Week" value={0} accent="var(--q-cyan)" subtext="Generated media" />
+            <StatCard label="Posts This Week" value={0} accent="var(--q-green)" subtext="Published output" />
+            <StatCard label="Demos Sent" value={0} accent="var(--color-text-primary)" subtext="Outbound demos" />
           </div>
 
           {/* Quick Actions */}
@@ -71,7 +70,7 @@ export default function AnalyticsPage() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
 
       <Link href="/founder/studio" className="text-xs text-orange-dim hover:text-orange">← Back to Studio</Link>

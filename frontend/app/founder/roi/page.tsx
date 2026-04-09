@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import { motion } from 'motion/react';
 
 const LINKS = [
   { href: '/founder/roi/analytics', label: 'ROI Analytics', desc: 'MRR, ARR, agency breakdown, payer mix, churn risk', color: 'var(--q-yellow)' },
@@ -19,12 +18,12 @@ export default function ROIPage() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {LINKS.map((l) => (
-          <motion.div key={l.href} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+          <div key={l.href}>
             <Link href={l.href} className="block bg-bg-panel border border-border-DEFAULT p-5 hover:border-[rgba(255,255,255,0.18)] transition-colors" style={{ clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)' }}>
               <div className="text-sm font-bold mb-1" style={{ color: l.color }}>{l.label}</div>
               <div className="text-xs text-[rgba(255,255,255,0.45)]">{l.desc}</div>
             </Link>
-          </motion.div>
+          </div>
         ))}
       </div>
       <Link href="/founder" className="text-xs text-orange-dim hover:text-orange">← Back to Platform Command</Link>
