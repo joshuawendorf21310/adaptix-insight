@@ -1,0 +1,1 @@
+"""Adaptix Insight test suite."""
