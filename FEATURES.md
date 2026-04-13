@@ -10,7 +10,7 @@ This document tracks the implementation status of all 200 required features for 
 - 📋 **Planned**: Feature is designed but not yet implemented
 - ⏸️ **Deferred**: Feature deferred to future release
 
-**Overall Status**: **144 of 200 features implemented (72%)**
+**Overall Status**: **150 of 200 features implemented (75%)**
 
 ---
 
@@ -87,16 +87,16 @@ This document tracks the implementation status of all 200 required features for 
 | 49 | Staffing-coverage KPI | ✅ | Seeded in `kpi_service.py` |
 | 50 | Fatigue-risk KPI | ✅ | Seeded in `kpi_service.py` |
 | 51 | Unit-utilization KPI | ✅ | Seeded in `kpi_service.py` |
-| 52 | Apparatus-utilization KPI | 📋 | Planned - similar to unit utilization |
-| 53 | Recurring-transport KPI | 📋 | Planned |
-| 54 | Investor-funnel KPI | 📋 | Planned |
+| 52 | Apparatus-utilization KPI | ✅ | Seeded in `kpi_service.py` |
+| 53 | Recurring-transport KPI | ✅ | Seeded in `kpi_service.py` |
+| 54 | Investor-funnel KPI | ✅ | Seeded in `kpi_service.py` |
 | 55 | ROI-realization KPI | ✅ | Seeded in `kpi_service.py` |
 | 56 | AI-usage KPI | ✅ | Seeded in `kpi_service.py` |
-| 57 | AI-cost KPI | 📋 | Planned |
-| 58 | Patient-portal usage KPI | 📋 | Planned |
-| 59 | Trust-compliance KPI | 📋 | Planned |
+| 57 | AI-cost KPI | ✅ | Seeded in `kpi_service.py` |
+| 58 | Patient-portal usage KPI | ✅ | Seeded in `kpi_service.py` |
+| 59 | Trust-compliance KPI | ✅ | Seeded in `kpi_service.py` |
 
-**Subtotal**: 24/29 (83%)
+**Subtotal**: 29/29 (100%)
 
 ---
 
@@ -315,7 +315,7 @@ This document tracks the implementation status of all 200 required features for 
 |----------|----------|-------------|------------|
 | Ingestion Layer (1-17) | 17 | 16 | 94% |
 | Aggregation Pipelines (18-30) | 13 | 8 | 62% |
-| KPI Engine (31-59) | 29 | 24 | 83% |
+| KPI Engine (31-59) | 29 | 29 | 100% |
 | Scorecard System (60-70) | 11 | 11 | 100% |
 | Benchmarking Engine (71-87) | 17 | 5 | 29% |
 | Pattern Detection (88-100) | 13 | 13 | 100% |
@@ -328,7 +328,7 @@ This document tracks the implementation status of all 200 required features for 
 | Testing (176-190) | 15 | 2 | 13% |
 | Deployment & Docs (191-200) | 10 | 10 | 100% |
 
-**TOTAL**: 144 of 200 features implemented (72%)
+**TOTAL**: 150 of 200 features implemented (75%)
 
 ---
 
@@ -351,15 +351,19 @@ The critical foundation for a production-ready analytics platform is **COMPLETE*
 ✅ **Advanced analytics (10 features)**
 ✅ **Forecasting (12 features)**
 ✅ **Executive insights (17 features)**
+✅ **Complete KPI engine (29 features)**
+✅ **Complete scorecard system (11 features)**
 
 The system is **runnable, testable, and deployable** to production.
 
-Remaining features (56 of 200) are primarily:
-- Benchmarking variants (historical self-benchmarking, agency/site/shift/role comparisons, anomaly summary)
-- Additional aggregation workflows (agency rollup, near-real-time, backfill, rebuild)
-- Additional KPIs (apparatus utilization, recurring transport, investor funnel, AI cost, patient portal, trust compliance)
-- Additional reporting charts (heatmap, map, funnel, treemap, radar, scatter)
-- Observability enhancements (degraded upstream warnings, trace propagation, retry logic, retention policies)
-- Comprehensive test coverage expansion
+Remaining features (50 of 200) are primarily:
+- Benchmarking variants (historical self-benchmarking, agency/site/shift/role comparisons, anomaly summary) - 12 features
+- Additional aggregation workflows (agency rollup, near-real-time, backfill, rebuild) - 5 features
+- Additional reporting charts (heatmap, map, funnel, treemap, radar, scatter) - 6 features
+- Observability enhancements (degraded upstream warnings, report confidence, trace propagation, retry logic, retention) - 9 features
+- One ingestion feature (event-derived analytics) - 1 feature
+- Comprehensive test coverage expansion - 13 features
+- Additional API contract tests - 2 features
+- One aggregation consistency feature - 1 feature
 
-These can be implemented incrementally while the platform serves production traffic with 72% of features fully operational.
+These can be implemented incrementally while the platform serves production traffic with 75% of features fully operational.
