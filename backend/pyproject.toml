@@ -5,15 +5,58 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "adaptix-insight-backend"
 version = "0.1.0"
-description = "Standalone Adaptix Insight backend shell"
+description = "Adaptix Insight - Analytics, Intelligence, Reporting, and Decision Support Platform"
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.115,<1",
   "uvicorn>=0.30,<1",
   "pydantic>=2.7,<3",
-  "prometheus-client>=0.20,<1"
+  "pydantic-settings>=2.0,<3",
+  "prometheus-client>=0.20,<1",
+  "sqlalchemy>=2.0,<3",
+  "alembic>=1.13,<2",
+  "asyncpg>=0.29,<1",
+  "psycopg2-binary>=2.9,<3",
+  "python-dotenv>=1.0,<2",
+  "structlog>=24.1,<25",
+  "opentelemetry-api>=1.20,<2",
+  "opentelemetry-sdk>=1.20,<2",
+  "opentelemetry-instrumentation-fastapi>=0.41,<1",
+  "python-multipart>=0.0.6,<1",
+  "httpx>=0.27,<1",
+  "pandas>=2.1,<3",
+  "numpy>=1.26,<2",
+  "python-dateutil>=2.8,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0,<9",
+  "pytest-asyncio>=0.23,<1",
+  "pytest-cov>=4.1,<5",
+  "httpx>=0.27,<1",
+  "faker>=22.0,<23",
+  "ruff>=0.1,<1",
+  "mypy>=1.8,<2",
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["core_app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
