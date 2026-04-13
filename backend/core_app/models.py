@@ -57,7 +57,7 @@ class AnalyticsEvent(Base):
     correlation_id: Mapped[str | None] = mapped_column(String(255), index=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(255), unique=True, index=True)
     payload: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
-    metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON)
+    event_metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"), nullable=False
     )
@@ -81,7 +81,7 @@ class IngestionAuditLog(Base):
     action: Mapped[str] = mapped_column(String(50), nullable=False)
     status: Mapped[str] = mapped_column(String(50), nullable=False)
     error_message: Mapped[str | None] = mapped_column(Text)
-    metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON)
+    audit_metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"), nullable=False, index=True
     )
@@ -186,7 +186,7 @@ class KPIValue(Base):
     trend_direction: Mapped[str | None] = mapped_column(String(20))
     delta_from_previous: Mapped[float | None] = mapped_column(Float)
     delta_from_target: Mapped[float | None] = mapped_column(Float)
-    metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON)
+    kpi_metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON)
     quality_score: Mapped[float | None] = mapped_column(Float)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"), nullable=False
