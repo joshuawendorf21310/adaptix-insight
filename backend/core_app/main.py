@@ -9,16 +9,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from core_app.api.adaptix_insight_router import router as adaptix_insight_router
+from core_app.api.analytics_router import router as analytics_router
 from core_app.api.auth_router import router as auth_router
 from core_app.api.benchmark_router import router as benchmark_router
 from core_app.api.commercial_router import router as commercial_router
 from core_app.api.data_quality_router import router as data_quality_router
+from core_app.api.forecasting_router import router as forecasting_router
 from core_app.api.founder_router import router as founder_router
 from core_app.api.founder_surface_router import router as founder_surface_router
 from core_app.api.health_router import router as health_router
 from core_app.api.ingestion_router import router as ingestion_router
+from core_app.api.insights_router import router as insights_router
 from core_app.api.kpi_router import router as kpi_router
 from core_app.api.metrics_router import router as metrics_router
+from core_app.api.pattern_router import router as pattern_router
 from core_app.api.report_router import router as report_router
 from core_app.api.scorecard_router import router as scorecard_router
 from core_app.api.system_health_shell_router import router as system_health_router
@@ -81,6 +85,12 @@ app.include_router(scorecard_router)
 app.include_router(benchmark_router)
 app.include_router(report_router)
 app.include_router(data_quality_router)
+
+# Advanced analytics routers
+app.include_router(pattern_router)
+app.include_router(analytics_router)
+app.include_router(forecasting_router)
+app.include_router(insights_router)
 
 # Legacy routers (for migration compatibility)
 app.include_router(auth_router)
