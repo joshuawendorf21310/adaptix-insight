@@ -10,7 +10,7 @@ This document tracks the implementation status of all 200 required features for 
 - 📋 **Planned**: Feature is designed but not yet implemented
 - ⏸️ **Deferred**: Feature deferred to future release
 
-**Overall Status**: **137 of 200 features implemented (68.5%)**
+**Overall Status**: **144 of 200 features implemented (72%)**
 
 ---
 
@@ -106,17 +106,17 @@ This document tracks the implementation status of all 200 required features for 
 |---|---------|--------|----------------|
 | 60 | Executive scorecard API | ✅ | `scorecard_router.py:get_executive_scorecard` |
 | 61 | Operational scorecard API | ✅ | `scorecard_router.py:get_operational_scorecard` |
-| 62 | Agency scorecard API | 📋 | Planned - similar pattern |
-| 63 | Station scorecard API | 📋 | Planned - similar pattern |
-| 64 | Crew scorecard API | 📋 | Planned - similar pattern |
-| 65 | Unit scorecard API | 📋 | Planned - similar pattern |
-| 66 | Apparatus scorecard API | 📋 | Planned - similar pattern |
-| 67 | Service-line scorecard API | 📋 | Planned - similar pattern |
+| 62 | Agency scorecard API | ✅ | `extended_scorecard_service.py:get_agency_scorecard` |
+| 63 | Station scorecard API | ✅ | `extended_scorecard_service.py:get_station_scorecard` |
+| 64 | Crew scorecard API | ✅ | `extended_scorecard_service.py:get_crew_scorecard` |
+| 65 | Unit scorecard API | ✅ | `extended_scorecard_service.py:get_unit_scorecard` |
+| 66 | Apparatus scorecard API | ✅ | `extended_scorecard_service.py:get_apparatus_scorecard` |
+| 67 | Service-line scorecard API | ✅ | `extended_scorecard_service.py:get_service_line_scorecard` |
 | 68 | Billing scorecard API | ✅ | `scorecard_router.py:get_billing_scorecard` |
 | 69 | Investor scorecard API | ✅ | `scorecard_router.py:get_investor_scorecard` |
-| 70 | Product-adoption scorecard API | 📋 | Planned - similar pattern |
+| 70 | Product-adoption scorecard API | ✅ | `extended_scorecard_service.py:get_product_adoption_scorecard` |
 
-**Subtotal**: 4/11 (36%)
+**Subtotal**: 11/11 (100%)
 
 ---
 
@@ -316,7 +316,7 @@ This document tracks the implementation status of all 200 required features for 
 | Ingestion Layer (1-17) | 17 | 16 | 94% |
 | Aggregation Pipelines (18-30) | 13 | 8 | 62% |
 | KPI Engine (31-59) | 29 | 24 | 83% |
-| Scorecard System (60-70) | 11 | 4 | 36% |
+| Scorecard System (60-70) | 11 | 11 | 100% |
 | Benchmarking Engine (71-87) | 17 | 5 | 29% |
 | Pattern Detection (88-100) | 13 | 13 | 100% |
 | Reporting & Export (101-115) | 15 | 9 | 60% |
@@ -328,7 +328,7 @@ This document tracks the implementation status of all 200 required features for 
 | Testing (176-190) | 15 | 2 | 13% |
 | Deployment & Docs (191-200) | 10 | 10 | 100% |
 
-**TOTAL**: 137 of 200 features implemented (68.5%)
+**TOTAL**: 144 of 200 features implemented (72%)
 
 ---
 
@@ -354,13 +354,12 @@ The critical foundation for a production-ready analytics platform is **COMPLETE*
 
 The system is **runnable, testable, and deployable** to production.
 
-Remaining features (63 of 200) are primarily:
-- Additional scorecard types (agency, station, crew, unit, apparatus, service-line, product-adoption)
-- Benchmarking variants (historical self-benchmarking, agency/site/shift/role comparisons)
+Remaining features (56 of 200) are primarily:
+- Benchmarking variants (historical self-benchmarking, agency/site/shift/role comparisons, anomaly summary)
 - Additional aggregation workflows (agency rollup, near-real-time, backfill, rebuild)
 - Additional KPIs (apparatus utilization, recurring transport, investor funnel, AI cost, patient portal, trust compliance)
 - Additional reporting charts (heatmap, map, funnel, treemap, radar, scatter)
 - Observability enhancements (degraded upstream warnings, trace propagation, retry logic, retention policies)
 - Comprehensive test coverage expansion
 
-These can be implemented incrementally while the platform serves production traffic with 68.5% of features fully operational.
+These can be implemented incrementally while the platform serves production traffic with 72% of features fully operational.

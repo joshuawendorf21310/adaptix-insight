@@ -219,3 +219,158 @@ async def get_unit_scorecard(
         metrics=metrics,
         summary={"unit_id": unit_id},
     )
+
+
+async def get_apparatus_scorecard(
+    db: AsyncSession,
+    tenant_id: uuid.UUID,
+    apparatus_id: str,
+    period_start: datetime,
+    period_end: datetime,
+) -> ScorecardResponse:
+    """
+    Generate apparatus-level scorecard.
+
+    Feature #66: Apparatus scorecard API
+    """
+    apparatus_kpis = [
+        "apparatus_utilization",
+        "unit_utilization",
+        "response_time",
+        "maintenance_compliance",
+    ]
+
+    kpis = await kpi_service.get_kpi_values(
+        db=db,
+        tenant_id=tenant_id,
+        kpi_codes=apparatus_kpis,
+        aggregation_level=AggregationLevelEnum.DAILY,
+        period_start=period_start,
+        period_end=period_end,
+    )
+
+    metrics = [
+        ScorecardMetric(
+            metric_code=kpi.kpi_code,
+            metric_name=kpi.kpi_name or kpi.kpi_code,
+            value=kpi.value,
+            status=kpi.status,
+            trend_direction=kpi.trend_direction,
+            delta_from_previous=kpi.delta_from_previous,
+            delta_from_target=kpi.delta_from_target,
+        )
+        for kpi in kpis
+    ]
+
+    return ScorecardResponse(
+        scorecard_type="apparatus",
+        tenant_id=tenant_id,
+        period_start=period_start,
+        period_end=period_end,
+        metrics=metrics,
+        summary={"apparatus_id": apparatus_id},
+    )
+
+
+async def get_service_line_scorecard(
+    db: AsyncSession,
+    tenant_id: uuid.UUID,
+    service_line: str,
+    period_start: datetime,
+    period_end: datetime,
+) -> ScorecardResponse:
+    """
+    Generate service-line scorecard.
+
+    Feature #67: Service-line scorecard API
+    """
+    service_line_kpis = [
+        "response_time",
+        "chart_completion",
+        "billing_throughput",
+        "denial_rate",
+        "patient_satisfaction",
+    ]
+
+    kpis = await kpi_service.get_kpi_values(
+        db=db,
+        tenant_id=tenant_id,
+        kpi_codes=service_line_kpis,
+        aggregation_level=AggregationLevelEnum.MONTHLY,
+        period_start=period_start,
+        period_end=period_end,
+    )
+
+    metrics = [
+        ScorecardMetric(
+            metric_code=kpi.kpi_code,
+            metric_name=kpi.kpi_name or kpi.kpi_code,
+            value=kpi.value,
+            status=kpi.status,
+            trend_direction=kpi.trend_direction,
+            delta_from_previous=kpi.delta_from_previous,
+            delta_from_target=kpi.delta_from_target,
+        )
+        for kpi in kpis
+    ]
+
+    return ScorecardResponse(
+        scorecard_type="service_line",
+        tenant_id=tenant_id,
+        period_start=period_start,
+        period_end=period_end,
+        metrics=metrics,
+        summary={"service_line": service_line},
+    )
+
+
+async def get_product_adoption_scorecard(
+    db: AsyncSession,
+    tenant_id: uuid.UUID,
+    period_start: datetime,
+    period_end: datetime,
+) -> ScorecardResponse:
+    """
+    Generate product adoption scorecard.
+
+    Feature #70: Product-adoption scorecard API
+    """
+    adoption_kpis = [
+        "ai_usage",
+        "ai_cost",
+        "chart_completion",
+        "nemsis_readiness",
+        "roi_realization",
+    ]
+
+    kpis = await kpi_service.get_kpi_values(
+        db=db,
+        tenant_id=tenant_id,
+        kpi_codes=adoption_kpis,
+        aggregation_level=AggregationLevelEnum.MONTHLY,
+        period_start=period_start,
+        period_end=period_end,
+    )
+
+    metrics = [
+        ScorecardMetric(
+            metric_code=kpi.kpi_code,
+            metric_name=kpi.kpi_name or kpi.kpi_code,
+            value=kpi.value,
+            status=kpi.status,
+            trend_direction=kpi.trend_direction,
+            delta_from_previous=kpi.delta_from_previous,
+            delta_from_target=kpi.delta_from_target,
+        )
+        for kpi in kpis
+    ]
+
+    return ScorecardResponse(
+        scorecard_type="product_adoption",
+        tenant_id=tenant_id,
+        period_start=period_start,
+        period_end=period_end,
+        metrics=metrics,
+        summary={"adoption_tracking": True},
+    )
+
